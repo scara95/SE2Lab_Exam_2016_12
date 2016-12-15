@@ -233,7 +233,7 @@ app.post('/addStudent', function(request, response)
 		studentID = "body undefined";
 	}
     
-    if (studentID!="not defined" && studentID!="body undefined")
+  if (studentID!="not defined" && studentID!="body undefined")
 	{
 		//aceptable input
 		//create the student object
@@ -266,6 +266,61 @@ app.post('/addStudent', function(request, response)
 	}   
 
 });
+
+/**
+ * @brief search for students by mark
+ * @return search students using the specified criteria
+ */
+app.post('/searchByMark', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var criteria;
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.mark !== 'undefined' && request.body.mark)
+    {
+			 criteria = request.body.mark;
+    }
+		else 
+			criteria = "not defined";
+	
+	}
+	else
+	{
+		criteria = "body undefined";
+	}
+	
+	if (criteria!="not defined" && criteria!="body undefined")
+	{
+	  //validate input
+	  var comparator = studentManager.buildComparator(criteria[0]);
+	  var mark = parseInt(criteria[1]);
+	  if(!(comparator === undefined) && !isNaN(mark)) {
+		  //acceptable input
+		  //search for students
+		  var student = studentManager.searchStudentByMark(comparator, mark);
+		  response.writeHead(200, headers);
+		  response.end(JSON.stringify(student));
+		}
+
+	}
+  else    
+	{
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify("1"));
+	}
+});
+	
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

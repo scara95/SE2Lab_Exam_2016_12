@@ -78,7 +78,7 @@ paths:
       summary: return students that match a criteria
       description: it returns a list of students that match a criteria
       parameters:
-        - name: criteria
+        - name: mark
           in: formData
           description: criteria to be matched
           required: true
@@ -90,6 +90,12 @@ paths:
             type: array
             items:
               $ref: "#/definitions/student"
+        406:
+          description: ID of error
+          schema: 
+            properties:
+              error:
+                type: integer
           
 definitions:
   student:

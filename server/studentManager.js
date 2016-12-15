@@ -141,7 +141,7 @@ var insertStudent = function insertStudent(student)
  * @param NumberB
  * @return true if a < b
  */
-var lessThanComparator(a,b)
+var lessThanComparator = function (a,b)
 {
 	return a < b;
 }
@@ -152,7 +152,7 @@ var lessThanComparator(a,b)
  * @param NumberB
  * @return true if a > b
  */
-var greaterThanComparator(a,b)
+var greaterThanComparator = function (a,b)
 {
 	return a > b;
 }
@@ -162,7 +162,7 @@ var greaterThanComparator(a,b)
  * @param StringType
  * @return funcion comparator or undefined if not found
  */
-var buildComparator(type)
+var buildComparator = function (type)
 {
 	if(type === '<')
 	{
@@ -170,7 +170,7 @@ var buildComparator(type)
 	}
 	else if(type === '>')
 	{
-		return graterThanComparator;
+		return greaterThanComparator;
 	}
 	else
 	{
@@ -184,7 +184,7 @@ var buildComparator(type)
  * @param NumberMark
  * @return a list of matching students
  */
-var searchStudentByMark(comparator, mark)
+var searchStudentByMark = function (comparator, mark)
 {
 	return studentList.filter(function (student)
 	{
