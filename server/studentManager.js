@@ -135,6 +135,62 @@ var insertStudent = function insertStudent(student)
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
 
+/**
+ * @brief compare two numbers with <
+ * @param NumberA
+ * @param NumberB
+ * @return true if a < b
+ */
+var lessThanComparator(a,b)
+{
+	return a < b;
+}
+
+/**
+ * @brief compare two numbers with >
+ * @param NumberA
+ * @param NumberB
+ * @return true if a > b
+ */
+var greaterThanComparator(a,b)
+{
+	return a > b;
+}
+
+/**
+ * @brief compare two numbers with <
+ * @param StringType
+ * @return funcion comparator or undefined if not found
+ */
+var buildComparator(type)
+{
+	if(type === '<')
+	{
+		return lessThanComparator;
+	}
+	else if(type === '>')
+	{
+		return graterThanComparator;
+	}
+	else
+	{
+		return undefined;
+	}
+}
+
+/**
+ * @brief search students by specified criteria on mark mark
+ * @param FunctionComparator
+ * @param NumberMark
+ * @return a list of matching students
+ */
+var searchStudentByMark(comparator, mark)
+{
+	return studentList.filter(function (student)
+	{
+		return comparator(student.mark, mark);
+	});
+} 
 
 
 //export functions
@@ -143,4 +199,6 @@ exports.searchStudentSSN = searchStudentSSN;
 exports.deleteStudentID = deleteStudentID; 
 exports.deleteStudentSSN = deleteStudentSSN; 
 exports.insertStudent = insertStudent;  
-exports.getList = getList; 
+exports.getList = getList;   
+exports.buildComparator = buildComparator;   
+exports.searchStudentByMark = searchStudentByMark; 
